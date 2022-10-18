@@ -1,27 +1,22 @@
 import React, { useEffect } from 'react'
 import { Box , Text } from '@chakra-ui/react'
 import { useState } from 'react'
+import axios from 'axios'
 
 export default function Query() {
 
-    const [queryData, setqueryData] = useState();
+    const [queryData, setqueryData] = useState([]);
 
     const getQuery = async (e) => {
-        const res = await fetch("/query", {
-            method: "GET",
-            headers: {
-                Accept : "application/json",
-                "Content-Type": "application/json"
-            },
-        });
-
-        const data = await res.json();
-        console.log(data);
-
-        if(!res.status === 200 || !data){
-            console.log("No Query Found");
+        e.preventDefault();
+        try {
+            const res = await axios.get("http://localhost:5000/query");
+            setqueryData(res.data);
+            console.log(res.data);
+        } 
+        catch (err) {
+            console.log(err);
         }
-        // setqueryData(data);
     }
 
     useEffect(() => {
@@ -52,20 +47,20 @@ export default function Query() {
             <Text fontSize="3xl" fontWeight="bold" color="teal.500">
                 Your Query
             </Text>
-            <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Name : {queryData.Fullname}
+            <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText" method = "GET">
+                Name : Amit Pile
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Email : {queryData.Email}
+                Email : amitpile2002@gmail.com
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Subject : {queryData.Subject}
+                Subject : Query
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Message : {queryData.Message}
+                Message : xyz
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Query : {queryData.Query}
+                Query : abc
             </Text>
 
         </Box>
