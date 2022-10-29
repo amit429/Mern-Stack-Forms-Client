@@ -72,8 +72,9 @@ export default function Registeration() {
         }
         else {
             window.alert("Registration Successful");
+            window.alert("Please Login");
             console.log("Registration Successful");
-            navigate("/welcome");
+            navigate("/login");
         }
 
         // window.location.reload();

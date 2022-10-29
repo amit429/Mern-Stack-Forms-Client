@@ -9,13 +9,10 @@ export default function Main() {
         navigate("/register");
     }
 
-    const contact =()=>{
-        navigate("/contact-us");
-    }
-
     const login =()=>{
         navigate("/login");
     }
+
   return (
     <>
         <Box style={{
@@ -35,16 +32,6 @@ export default function Main() {
                 </Text>
             </Button>
 
-            <Button onClick={contact} style={{
-                margin: "2%",
-                width: "15%",
-                height: "10vh",
-            }}>
-                <Text fontSize="2xl">
-                    Contact Form
-                </Text>
-            </Button>
-
             <Button onClick={login} style={{
                 margin: "2%",
                 width: "15%",
@@ -54,6 +41,7 @@ export default function Main() {
                     Sign In
                 </Text>
             </Button>
+
         </Box>
         
     

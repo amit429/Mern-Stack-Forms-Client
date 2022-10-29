@@ -8,6 +8,8 @@ import ContactUs from './pages/ContactUs';
 import Query from './pages/Query';
 import Main from './pages/Main';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Logout from './pages/Logout';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/query" element={<Query/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/logout" element={<Logout/>}/>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

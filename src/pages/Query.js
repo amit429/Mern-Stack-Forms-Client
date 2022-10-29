@@ -7,15 +7,21 @@ export default function Query() {
 
     const [queryData, setqueryData] = useState([]);
 
-    const getQuery = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios.get("http://localhost:5000/query");
-            setqueryData(res.data);
-            console.log(res.data);
-        } 
-        catch (err) {
-            console.log(err);
+    const getQuery = async () => {
+       try {
+            const res = await fetch("/query", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await res.json();
+            console.log(data);
+            setqueryData(data);
+       }
+         catch (error) {
+            console.log(error);
         }
     }
 
@@ -48,7 +54,7 @@ export default function Query() {
                 Your Query
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText" method = "GET">
-                Name : Amit Pile
+                Name : {queryData.Fullname}
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
                 Email : amitpile2002@gmail.com

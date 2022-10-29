@@ -20,12 +20,32 @@ export default function Login() {
         marginTop : "2%",
     }
 
+    const navigate = useNavigate();
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
     const login = async(e)=>{
         e.preventDefault();
-        
+
+        const res = await fetch("/sign-in",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                Email,
+                Password
+            }),
+        });
+
+        const data = await res.json();
+        if(res.status === 400 || !data){
+            window.alert("Invalid Credentials");
+        }
+        else{
+            window.alert("Login Successful");
+            navigate("/welcome");
+        }
     }
   return (
     <>
