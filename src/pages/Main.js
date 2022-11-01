@@ -1,6 +1,7 @@
 import { Button,Box, Text } from '@chakra-ui/react';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 export default function Main() {
     const navigate = useNavigate();
@@ -15,7 +16,9 @@ export default function Main() {
 
   return (
     <>
-        <Box style={{
+
+        <Navbar/>
+        {/* <Box style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -42,7 +45,7 @@ export default function Main() {
                 </Text>
             </Button>
 
-        </Box>
+        </Box> */}
         
     
     </>

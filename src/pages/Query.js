@@ -57,16 +57,16 @@ export default function Query() {
                 Name : {queryData.Fullname}
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Email : amitpile2002@gmail.com
+                Email : {queryData.Email}
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Subject : Query
+                Subject : {queryData.Subject}
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Message : xyz
+                Message : {queryData.Message}
             </Text>
             <Text fontSize="xl" fontWeight="medium" fontFamily="sans-serif" color="GrayText">
-                Query : abc
+                Query : {queryData.Query}
             </Text>
 
         </Box>
