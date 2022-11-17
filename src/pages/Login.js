@@ -65,7 +65,7 @@ export default function Login() {
                 Sign In
             </Text>
 
-            <FormControl method = "POST" style={{
+            <FormControl isRequired method = "POST" style={{
                 width: "100%",
                 display: "flex",
                 margin: "auto",
