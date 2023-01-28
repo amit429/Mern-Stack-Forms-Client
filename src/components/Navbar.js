@@ -24,16 +24,6 @@ export default function Navbar() {
         },
 
         {
-            name: "Sign Up",
-            link: "/register"
-        },
-
-        {
-            name: "Login",
-            link: "/login"
-        },
-
-        {
             name: "Send Recommendation",
             link: "/contact-us"
         },
@@ -41,7 +31,12 @@ export default function Navbar() {
         {
             name: "All Recommendations",
             link: "/query"
-        }
+        },
+
+        {
+            name: "Logout",
+            link: "/logout"
+        },
     ];
 
     

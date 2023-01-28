@@ -39,12 +39,12 @@ export default function Login() {
         });
 
         const data = await res.json();
-        if(res.status === 400 || !data){
+        if(res.status === 400 || !data || res.status === 401){
             window.alert("Invalid Credentials");
         }
         else{
             window.alert("Login Successful");
-            navigate("/welcome");
+            navigate("/");
         }
     }
   return (

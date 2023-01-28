@@ -13,7 +13,7 @@ import {
     
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function ContactUs() {
     const style = {
@@ -52,11 +52,46 @@ export default function ContactUs() {
             navigate("/query");
         }
         else {
-            window.alert("Query Submission Successful");
-            console.log("Query Submission Successful");
+            window.alert("Recommendation Successful");
+            console.log("Recommendation Successful");
             window.location.reload();
         }
     }
+
+    const [profile, setProfile] = useState("");
+
+    const profilepage = async (e) => {
+
+        try {
+            const res = await fetch("/profile", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+
+           // console.log(res.json());
+
+            const data = await res.json();
+            setProfile(data);
+            console.log(data);
+
+           if(!res.status === 200){
+                const error = new Error(res.error);
+                throw error;
+           }
+        }
+        catch (error) {
+           window.alert("Please Login");
+            navigate("/login");
+        }
+    }
+
+    useEffect(() => {
+        profilepage();
+    }, []);
 
     
   return (
@@ -74,8 +109,8 @@ export default function ContactUs() {
             boxShadow: "0 0 5px 0 rgba(0,0,0,0.2)",
             borderRadius: "5px"
         }}>
-            <Text fontSize="4xl" textAlign="center" fontWeight="bold" color="teal.500">
-                Contact Us Form
+            <Text fontSize="3xl" textAlign="center" fontWeight="bold" color="teal.500">
+                Recommend Something Special
             </Text>
 
             <FormControl method = "POST" style={{
@@ -85,7 +120,7 @@ export default function ContactUs() {
                 flexDirection: "column",
                 padding: "5%",
             }}>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <Input 
                     placeholder="Full Name" 
                     _placeholder={{ fontSize: "sm" }}
@@ -100,24 +135,30 @@ export default function ContactUs() {
                     placeholder="Email" 
                     _placeholder={{ fontSize: "sm" }}
                     required 
+                    isReadOnly
                     variant= "flushed"                    
                     autoComplete="on"
-                    value={Email}
+                    value={profile.Email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <FormLabel style={style}>Subject</FormLabel>
-                <Input 
-                    placeholder="Subject" 
+                <FormLabel style={style}>What are you recommending</FormLabel>
+                <Select 
+                    placeholder="Select a type" 
                     _placeholder={{ fontSize: "sm" }}
-                    required 
-                    variant= "flushed"
-                    value={Subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                />
+                    variant= "flushed"  
+                    onChange={(e)=>{
+                        setSubject(e.target.value);
+                    }}
+                >
+                    <option value="Male">Movie</option>
+                    <option value="Female">Series</option>
+                    <option value="Other">Song</option>
+                    <option value="Other">Career Related</option>
+                </Select>
 
-                <FormLabel style={style}>Message</FormLabel>
-                <Textarea 
+                <FormLabel style={style}>Put link (if any)</FormLabel>
+                <Input 
                     placeholder="Type your message here" 
                     _placeholder={{ fontSize: "sm" }}
                     required 
@@ -126,7 +167,7 @@ export default function ContactUs() {
                     onChange={(e) => setMessage(e.target.value)}
                 />
 
-                <FormLabel style={style}>Query</FormLabel>
+                <FormLabel style={style}>Write a brief description</FormLabel>
                 <Textarea
                     placeholder="Type your query here" 
                     _placeholder={{ fontSize: "sm" }}

@@ -1,51 +1,51 @@
 import { Button,Box, Text } from '@chakra-ui/react';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
 export default function Main() {
     const navigate = useNavigate();
 
-    const register =()=>{
-        navigate("/register");
+    const [profile, setProfile] = useState("");
+
+    const profilepage = async (e) => {
+
+        try {
+            const res = await fetch("/profile", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+
+           // console.log(res.json());
+
+            const data = await res.json();
+            setProfile(data);
+            console.log(data);
+
+           if(!res.status === 200){
+                const error = new Error(res.error);
+                throw error;
+           }
+        }
+        catch (error) {
+           window.alert("Please Login");
+            navigate("/login");
+        }
     }
 
-    const login =()=>{
-        navigate("/login");
-    }
+    useEffect(() => {
+        profilepage();
+    }, []);
 
   return (
     <>
 
         <Navbar/>
-        {/* <Box style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            marginTop: "5%",
-        }}>
-            <Button onClick={register} style={{
-                margin: "2%",
-                width: "15%",
-                height: "10vh",
-            }}>
-                <Text fontSize="2xl">
-                    Register
-                </Text>
-            </Button>
-
-            <Button onClick={login} style={{
-                margin: "2%",
-                width: "15%",
-                height: "10vh",
-            }}>
-                <Text fontSize="2xl">
-                    Sign In
-                </Text>
-            </Button>
-
-        </Box> */}
         
     
     </>
