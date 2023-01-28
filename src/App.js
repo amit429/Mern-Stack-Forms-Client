@@ -10,6 +10,7 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Logout from './pages/Logout';
+import ImageGallery from './pages/ImageGallery';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/query" element={<Query/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/logout" element={<Logout/>}/>
+          <Route path="/image-gallery" element={<ImageGallery/>}/>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
